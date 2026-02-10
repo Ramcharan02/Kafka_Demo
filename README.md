@@ -10,12 +10,16 @@ Consumer: Sees ID: 1, looks up the "Phonebook" to retrieve the schema, and uses 
 
 3. How It Works (The Code Components)
 This project simulates this architecture using four key components:
-AuditRecord.proto (The Contract): A Protocol Buffer file that strictly defines the data structure (e.g., trace_id, payload). Both Producer and Consumer agree on this file.
-SchemaRegistryController (The Phonebook): A simulated in-memory store that maps a Schema Definition to a unique Integer ID.
-CustomProtobufSerializer (The Packer): Intercepts the object before it goes to Kafka. It talks to the Registry to get the ID and packs the message as [4-byte ID] + [Data].
-CustomProtobufDeserializer (The Unpacker): Intercepts the message from Kafka. It reads the ID, fetches the correct Schema, and reconstructs the Java object.
 
-4. How to Run
+    • AuditRecord.proto (The Contract): A Protocol Buffer file that strictly defines the data structure (e.g., trace_id, payload). Both Producer and Consumer agree on this file.
+
+    • SchemaRegistryController (The Phonebook): A simulated in-memory store that maps a Schema Definition to a unique Integer ID.
+
+    • CustomProtobufSerializer (The Packer): Intercepts the object before it goes to Kafka. It talks to the Registry to get the ID and packs the message as [4-byte ID] + [Data].
+
+    • CustomProtobufDeserializer (The Unpacker): Intercepts the message from Kafka. It reads the ID, fetches the correct Schema, and reconstructs the Java object.
+
+5. How to Run
 start the local Kafka broker
 Build: Run mvn clean install to auto-generate the Java classes from the .proto file.
 Run: Execute the CombinedApp class
