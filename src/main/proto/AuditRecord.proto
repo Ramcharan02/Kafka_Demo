@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.example.audit;
+
+option java_package = "com.example.audit.generated";
+option java_outer_classname = "AuditRecordProto";
+
+message AuditRecord {
+  string trace_id = 1;
+  string service_name = 2;
+  string payload = 3;
+  int64 timestamp = 4;
+}
